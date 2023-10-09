@@ -11,7 +11,8 @@ before_install:
     - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
     - openssl aes-256-cbc -K $encrypted_efba3b7787e2_key -iv $encrypted_efba3b7787e2_iv -in 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg.enc -out 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg -d
     - gpg --import 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg
-    - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD}
+    - mkdir -p ${REPO_TO_BUILD}
+    - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD} ${REPO_TO_BUILD}
     - cd ${REPO_TO_BUILD}
 install:
     - debuild '-k3087CD3324A99FBC'
