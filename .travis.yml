@@ -22,6 +22,8 @@ before_install:
     - mkdir -p ${REPO_TO_BUILD}
     - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD} ${REPO_TO_BUILD}
     - cd ${REPO_TO_BUILD}
+    - git checkout ${BRANCH_TO_BUILD:=master}
+    - git pull --rebase
 install:
     - debuild '-k3087CD3324A99FBC'
 after_success:
