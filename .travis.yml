@@ -4,6 +4,7 @@ env:
     global:
       - HUB_PROTOCOL=https
       - HUB_FORGE=github.com
+      - DEBARCHIVER_KNOW_HOST="debian.alternc.org ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIHX0uNv8sqOkvTy7vYXQFJXAQGCj7/tIp6F3xeabUflI"
       #DEBARCHIVER_PASSPHRASE
       - secure: "HXKv8qVvaDP4yunJY4En0veCsZrJB3Vmv780jtDnYcYlWMk0Nm8/749DOBkBvBk3bPI+ZDM7xVevqAsQGBugz0PbH8ATyzG2fy0zB1A6OXVffBVrwU4ffMyCkFGF3iOI40cQJYjPh6lGtUKsqRJWUU8ow8fHned3P0VOEoNMjP6PACDGrNXUi9l5cGVNjuMZmDuOPo/hqYzsn1s6UtpeDzY7jRuW1WKSBvUW/Ss51T6SFadpaU2AF9CjwSQhIgmP4zWeHk/OGYJquZQDx+YQmiNcOq5JYRJtwaF/2OkGY7eFHR+w1iaM9lKmhabHhRkrEv4vp50CDJv7tU2LWB29S09ccVIGZotuKKOBtidV6fd1XYfrA2RfaAgi4tZVWGVCzgVslAqJEm35Mr223ksXpxMRRiMYMWgigl4ZjA7+I44AhZCwcaYMV1x6zeub0fqr6gVu/oQoT9rJ40Akm7HsgmhjWPwdIpH1GJBQTkehls6yhibpS2Fo3dG9h1lhF8VEfG50Hagl+A9L0jYZNsYnQ/gJutRZxsKgXzdUh4K+AaJKERQOPXjrPxLpRHS2e95v/Py8017Joj2hpftzMgQBw/6VdHFFUM8IYDtQ6ewTyd97y0u3uT+pckZyVYlZGkyLq7s7rkoj+1Y6sTAUy7hy7CfHkZD108616B99mPWM5ZM="
 git:
@@ -17,6 +18,7 @@ before_install:
     - chmod 600 debarchiver.key
     - chmod 700 ssh-askpass-debarchiver
     - gpg --import 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg
+    - echo ${DEBARCHIVER_KNOW_HOST} >> ~/.ssh/known_hosts
     - eval `ssh-agent -s`
     - DISPLAY=1 SSH_ASKPASS_REQUIRE=force SSH_ASKPASS=./ssh-askpass-debarchiver ssh-add debarchiver.key < /dev/null
     - cp dput.cf ~/.dput.cf
