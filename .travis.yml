@@ -29,5 +29,6 @@ before_install:
     - git pull --rebase
 install:
     - debuild --no-lintian '-k3087CD3324A99FBC'
+    - debuild --no-lintian '-k3087CD3324A99FBC'
 after_success:
     - dput experimental ../alternc-*.changes
