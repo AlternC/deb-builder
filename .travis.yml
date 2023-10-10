@@ -1,4 +1,5 @@
 language : bash
+dist: jammy
 env:
     global:
       - HUB_PROTOCOL=https
