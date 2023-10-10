@@ -1,0 +1,32 @@
+[DEFAULT]
+fqdn = debian.alternc.org
+method = scp
+login = debarchiver
+
+[unstable]
+incoming = /var/lib/debarchiver/incoming/unstable/
+allowed_distributions = .*unstable.*
+
+[experimental]
+incoming = /var/lib/debarchiver/incoming/experimental/
+allowed_distributions = .*experimental.*
+
+[jessie]
+incoming = /var/lib/debarchiver/incoming/jessie/
+allowed_distributions = .*jessie.*
+
+[stretch]
+incoming = /var/lib/debarchiver/incoming/stretch/
+allowed_distributions = .*stretch.*
+
+[buster]
+incoming = /var/lib/debarchiver/incoming/buster/
+allowed_distributions = .*buster.*
+
+[bullseye]
+incoming = /var/lib/debarchiver/incoming/bullseye/
+allowed_distributions = .*bullseye.*
+
+[bookworm]
+incoming = /var/lib/debarchiver/incoming/bookworm/
+allowed_distributions = .*bookworm.*

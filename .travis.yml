@@ -10,7 +10,7 @@ git:
 if : |
   env(REPO_TO_BUILD) IS present
 before_install:
-    - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf
+    - sudo apt-get install -y debhelper devscripts fakeroot build-essential po-debconf dput
     - openssl aes-256-cbc -K $encrypted_efba3b7787e2_key -iv $encrypted_efba3b7787e2_iv -in 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg.enc -out 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg -d
     - openssl aes-256-cbc -K $encrypted_0d37685e10fd_key -iv $encrypted_0d37685e10fd_iv -in debarchiver.enc -out debarchiver.key -d
     - chmod 600 debarchiver.key
@@ -18,8 +18,11 @@ before_install:
     - gpg --import 6D5E5753F12109663BABEED53087CD3324A99FBC.gpg
     - eval `ssh-agent -s`
     - DISPLAY=1 SSH_ASKPASS_REQUIRE=force SSH_ASKPASS=./ssh-askpass-debarchiver ssh-add debarchiver.key < /dev/null
+    - cp dput.cf ~/.dput.cf
     - mkdir -p ${REPO_TO_BUILD}
     - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD} ${REPO_TO_BUILD}
     - cd ${REPO_TO_BUILD}
 install:
     - debuild '-k3087CD3324A99FBC'
+after_success:
+    - dput experimental ../alternc-*.changes
