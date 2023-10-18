@@ -30,3 +30,4 @@ allowed_distributions = .*bullseye.*
 [bookworm]
 incoming = /var/lib/debarchiver/incoming/bookworm/
 allowed_distributions = .*bookworm.*
+
