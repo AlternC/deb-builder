@@ -3,10 +3,10 @@
 REPO_TO_BUILD=${1}
 
 if [ ! -d "$REPO_TO_BUILD" ]; then
-    return 1;
+    exit 1;
 fi
 
-cd "$REPO_TO_BUILD" || return 1
+cd "$REPO_TO_BUILD" || exit 1
 
 DISTRIBUTIONS=$(dpkg-parsechangelog --show-field Distribution)
 

@@ -10,10 +10,10 @@ export DEBEMAIL="travis-ci@alternc.net"
 
 
 if [ ! -d "$REPO_TO_BUILD" ]; then
-    return 1;
+    exit 1;
 fi
 
-cd "$REPO_TO_BUILD" || return 1
+cd "$REPO_TO_BUILD" || exit 1
 
 #Move to branch
 git checkout "${BRANCH_TO_BUILD}"
@@ -34,5 +34,5 @@ fi
 
 #Nightly packages are yet done, we must stop here
 if [[ "${TAG_STATUS}" =~ "nightly" ]]; then
-    return 1
+    exit 1
 fi
