@@ -35,7 +35,8 @@ install:
     - cd ${REPO_TO_BUILD}
     - debuild --no-lintian '-k3087CD3324A99FBC'
 after_success:
-    - $TRAVIS_BUILD_DIR/dput.sh ${REPO_TO_BUILD}
+    - cd ${TRAVIS_BUILD_DIR}
+    - ./dput.sh ${REPO_TO_BUILD}
     - >
       if [[ ${BRANCH_TO_BUILD:=main} == "main" ]]; then
         gh config set prompt disabled
