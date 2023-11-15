@@ -23,13 +23,12 @@ before_install:
     - eval `ssh-agent -s`
     - DISPLAY=1 SSH_ASKPASS_REQUIRE=force SSH_ASKPASS=./ssh-askpass-debarchiver ssh-add debarchiver.key < /dev/null
     - cp dput.cf ~/.dput.cf
+    - rm -rf ${REPO_TO_BUILD}
     - mkdir -p ${REPO_TO_BUILD}
     - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD} ${REPO_TO_BUILD}
-    - cd ${REPO_TO_BUILD}
-    - git checkout ${BRANCH_TO_BUILD:=master}
-    - git pull --rebase
+    - ./prepare_building.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=master}
 install:
-    - debuild --no-lintian '-k3087CD3324A99FBC'
+    - cd ${REPO_TO_BUILD}
     - debuild --no-lintian '-k3087CD3324A99FBC'
 after_success:
-    - dput experimental ../alternc-*.changes
+    - $TRAVIS_BUILD_DIR/dput.sh ${REPO_TO_BUILD}
