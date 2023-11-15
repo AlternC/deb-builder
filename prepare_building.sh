@@ -1,7 +1,7 @@
 #!/bin/bash -x
 
 REPO_TO_BUILD=${1}
-BRANCH_TO_BUILD=${2:-master}
+BRANCH_TO_BUILD=${2:-main}
 
 VERSION_DEFAULT="0.0.0"
 DISTRIBUTION="stable"
