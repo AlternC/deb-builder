@@ -38,7 +38,7 @@ after_success:
     - cd ${TRAVIS_BUILD_DIR}
     - ./dput.sh ${REPO_TO_BUILD}
     - >
-      if [[ ${BRANCH_TO_BUILD:=main} == "main" ]]; then
+      if [[ ${BRANCH_TO_BUILD:=main} == "main" || ${BRANCH_TO_BUILD:=main} == "master" ]]; then
         gh config set prompt disabled
         gh release delete nightly -R ${REPO_TO_BUILD} --cleanup-tag -y
         gh release create \
