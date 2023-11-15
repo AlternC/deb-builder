@@ -22,7 +22,7 @@ git checkout "${BRANCH_TO_BUILD}"
 VERSION_PACKAGE=$(dpkg-parsechangelog --show-field Version)
 
 #Get current tag (only published version)
-TAG_STATUS=$(git describe --tags)
+export TAG_STATUS=$(git describe --tags)
 
 #If tag status is TAG or TAG-COMMIT_COUNT-SHA1. Then if - is present, current checkout is not a tagged
 if [[ "${TAG_STATUS}" =~ "-" ]]; then
@@ -30,4 +30,9 @@ if [[ "${TAG_STATUS}" =~ "-" ]]; then
     DISTRIBUTION="experimental"
     (git rev-parse --git-dir > /dev/null 2>&1 && git checkout debian/changelog) || true
     (git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "${DISTRIBUTION}" --force-bad-version --newversion "${VERSION_PACKAGE}" autobuild) || true
+fi
+
+#Nightly packages are yet done, we must stop here
+if [[ "${TAG_STATUS}" =~ "nightly" ]]; then
+    return 1
 fi
