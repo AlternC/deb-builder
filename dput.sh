@@ -11,5 +11,5 @@ cd "$REPO_TO_BUILD" || return 1
 DISTRIBUTIONS=$(dpkg-parsechangelog --show-field Distribution)
 
 for distribution in $DISTRIBUTIONS; do 
-    dput "$distribution" ../alternc-*.changes
+    dput "$distribution" ../*.changes
 done
