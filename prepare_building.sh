@@ -4,9 +4,10 @@ REPO_TO_BUILD=${1}
 BRANCH_TO_BUILD=${2:-main}
 
 VERSION_DEFAULT="0.0.0"
-DISTRIBUTION="stable"
+export DISTRIBUTION="stable"
 export DEBFULLNAME="Travis Bot"
 export DEBEMAIL="travis-ci@alternc.net"
+export VERSION_PACKAGE=""
 
 
 if [ ! -d "$REPO_TO_BUILD" ]; then
@@ -22,7 +23,7 @@ git checkout "${BRANCH_TO_BUILD}"
 VERSION_PACKAGE=$(dpkg-parsechangelog --show-field Version)
 
 #Get current tag (only published version)
-export TAG_STATUS=$(git describe --tags)
+TAG_STATUS=$(git describe --tags)
 
 #If tag status is TAG or TAG-COMMIT_COUNT-SHA1. Then if - is present, current checkout is not a tagged
 if [[ "${TAG_STATUS}" =~ "-" ]]; then

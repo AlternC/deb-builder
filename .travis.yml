@@ -38,14 +38,22 @@ after_success:
     - cd ${TRAVIS_BUILD_DIR}
     - ./dput.sh ${REPO_TO_BUILD}
     - >
-      if [[ ${BRANCH_TO_BUILD:=main} == "main" || ${BRANCH_TO_BUILD:=main} == "master" ]]; then
-        gh config set prompt disabled
-        gh release delete nightly -R ${REPO_TO_BUILD} --cleanup-tag -y
-        gh release create \
-          nightly \
+      gh config set prompt disabled;
+      TARGET=${VERSION_PACKAGE};
+
+      if [[ ${DISTRIBUTION} == "experimental" ]]; then
+        VERSION_PACKAGE=nightly
+        TARGET=${BRANCH_TO_BUILD:=main}
+        OPTIONS="\
           --prerelease \
-          --target ${BRANCH_TO_BUILD:=main} \
           --title "Automatic nightly build by Travis on $(date +'%F %T %Z')" \
-          --repo ${REPO_TO_BUILD} \
-          ${REPO_TO_BUILD}/../*.deb
-      fi
+        "
+        gh release delete ${VERSION_PACKAGE} -R ${REPO_TO_BUILD} --cleanup-tag -y
+      fi;
+
+      gh release create \
+        ${VERSION_PACKAGE} \
+        ${OPTIONS} \
+        --target ${TARGET}\
+        --repo ${REPO_TO_BUILD} \
+        ${REPO_TO_BUILD}/../*.deb
