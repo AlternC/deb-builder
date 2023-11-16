@@ -4,10 +4,10 @@ REPO_TO_BUILD=${1}
 BRANCH_TO_BUILD=${2:-main}
 
 VERSION_DEFAULT="0.0.0"
-export DISTRIBUTION="stable"
+DISTRIBUTION="stable"
+VERSION_PACKAGE=""
 export DEBFULLNAME="Travis Bot"
 export DEBEMAIL="travis-ci@alternc.net"
-export VERSION_PACKAGE=""
 
 
 if [ ! -d "$REPO_TO_BUILD" ]; then
