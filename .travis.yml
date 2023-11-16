@@ -37,23 +37,4 @@ install:
 after_success:
     - cd ${TRAVIS_BUILD_DIR}
     - ./dput.sh ${REPO_TO_BUILD}
-    - >
-      gh config set prompt disabled;
-      TARGET=${VERSION_PACKAGE};
-
-      if [[ ${DISTRIBUTION} == "experimental" ]]; then
-        VERSION_PACKAGE=nightly
-        TARGET=${BRANCH_TO_BUILD:=main}
-        OPTIONS="\
-          --prerelease \
-          --title "Automatic nightly build by Travis on $(date +'%F %T %Z')" \
-        "
-        gh release delete ${VERSION_PACKAGE} -R ${REPO_TO_BUILD} --cleanup-tag -y
-      fi;
-
-      gh release create \
-        ${VERSION_PACKAGE} \
-        ${OPTIONS} \
-        --target ${TARGET}\
-        --repo ${REPO_TO_BUILD} \
-        ${REPO_TO_BUILD}/../*.deb
+    - ./deploy_github.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main}
