@@ -36,6 +36,6 @@ if [[ "${TAG_STATUS}" =~ "-" ]]; then
 fi
 
 #Nightly packages are yet done, we must stop here
-if [[ "${TAG_STATUS}" =~ "nightly" ]]; then
+if [[ "${TAG_STATUS}" == "nightly" ]]; then
     exit 1
 fi
