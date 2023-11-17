@@ -23,7 +23,8 @@ git reset --hard "${BRANCH_TO_BUILD}"
 VERSION_PACKAGE=$(dpkg-parsechangelog --show-field Version)
 
 #Get current tag (only published version)
-TAG_STATUS=$(git describe --tags)
+#If any tag set use a defautlt tag status
+TAG_STATUS=$(git describe --tags || echo "${VERSION_DEFAULT}-0-g$(git rev-list --max-parents=0 HEAD)")
 
 #If tag status is TAG or TAG-COMMIT_COUNT-SHA1. Then if - is present, current checkout is not a tagged
 if [[ "${TAG_STATUS}" =~ "-" ]]; then
