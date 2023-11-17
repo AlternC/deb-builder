@@ -17,7 +17,8 @@ fi
 cd "$REPO_TO_BUILD" || exit 1
 
 #Move to branch and clear any local change
-git reset --hard "${BRANCH_TO_BUILD}"
+git reset --hard HEAD
+git checkout "${BRANCH_TO_BUILD}"
 
 #Get current version package
 VERSION_PACKAGE=$(dpkg-parsechangelog --show-field Version)
