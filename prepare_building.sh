@@ -2,6 +2,7 @@
 
 REPO_TO_BUILD=${1}
 BRANCH_TO_BUILD=${2:-main}
+FORCE_BUILD=${3:-false}
 
 VERSION_DEFAULT="0.0.0"
 DISTRIBUTION="stable"
@@ -25,7 +26,11 @@ VERSION_PACKAGE=$(dpkg-parsechangelog --show-field Version)
 
 #Get current tag (only published version)
 #If any tag set use a defautlt tag status
-TAG_STATUS=$(git describe --tags || echo "${VERSION_DEFAULT}-0-g$(git rev-list --max-parents=0 HEAD)")
+if [[ ${FORCE_BUILD} == false ]];then
+    TAG_STATUS=$(git describe --tags || echo "${VERSION_DEFAULT}-0-g$(git rev-list --max-parents=0 HEAD)")
+else
+    TAG_STATUS=$(git describe --tags --exclude nightly || echo "${VERSION_DEFAULT}-0-g$(git rev-list --max-parents=0 HEAD)")
+fi
 
 #If tag status is TAG or TAG-COMMIT_COUNT-SHA1. Then if - is present, current checkout is not a tagged
 if [[ "${TAG_STATUS}" =~ "-" ]]; then

@@ -30,7 +30,7 @@ before_install:
     - rm -rf ${REPO_TO_BUILD}
     - mkdir -p ${REPO_TO_BUILD}
     - git clone ${HUB_PROTOCOL}://${HUB_FORGE}/${REPO_TO_BUILD} ${REPO_TO_BUILD}
-    - ./prepare_building.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main}
+    - ./prepare_building.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main} ${FORCE_BUILD:=false}
 install:
     - cd ${REPO_TO_BUILD}
     - debuild --no-tgz-check --no-lintian '-k3087CD3324A99FBC'
