@@ -33,7 +33,7 @@ before_install:
     - ./prepare_building.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main}
 install:
     - cd ${REPO_TO_BUILD}
-    - debuild --no-lintian '-k3087CD3324A99FBC'
+    - debuild --no-tgz-check --no-lintian '-k3087CD3324A99FBC'
 after_success:
     - cd ${TRAVIS_BUILD_DIR}
     - ./dput.sh ${REPO_TO_BUILD}
