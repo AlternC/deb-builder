@@ -41,6 +41,11 @@ if [[ "${TAG_STATUS}" =~ "-" ]]; then
     (git rev-parse --git-dir > /dev/null 2>&1 && echo|dch --distribution "${DISTRIBUTION}" --force-bad-version --newversion "${VERSION_PACKAGE}" autobuild) || true
 fi
 
+#Force compression mode
+mkdir -p debian/source/
+printf "3.0 (native)" > debian/source/format
+printf "compression = \"bzip2\"\ncompression-level = 9\n" >> debian/source/options
+
 #Nightly packages are yet done, we must stop here
 if [[ "${TAG_STATUS}" == "nightly" ]]; then
     exit 1
