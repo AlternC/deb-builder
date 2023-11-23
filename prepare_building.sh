@@ -19,6 +19,7 @@ cd "$REPO_TO_BUILD" || exit 1
 
 #Move to branch and clear any local change
 git reset --hard HEAD
+git fetch --all
 git checkout "${BRANCH_TO_BUILD}"
 
 #Get current version package
