@@ -44,7 +44,10 @@ fi
 #Force compression mode
 mkdir -p debian/source/
 printf "3.0 (native)" > debian/source/format
-printf "compression = \"bzip2\"\ncompression-level = 9\n" >> debian/source/options
+printf "compression = \"gzip\"\ncompression-level = 9\n" >> debian/source/options
+
+#Set compression mode on rules part
+printf "override_dh_builddeb:\n	dh_builddeb -- -Zgzip\n" >> debian/rules
 
 #Nightly packages are yet done, we must stop here
 if [[ "${TAG_STATUS}" == "nightly" ]]; then
