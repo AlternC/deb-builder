@@ -1,3 +1,5 @@
+.vscode/
+hook/config/config.php
 *.gpg
 debarchiver.key
 /AlternC/
