@@ -39,7 +39,7 @@ Use this repository at your own risk.
 
 ### Stable codename
 
-As we try to support at least two Debian releases, we don't use any more short codenames such as **stable** or **oldstabe**.
+As we try to support at least two Debian releases, we don't use any more short codenames such as **stable** or **oldstable**.
 We only use explicit codenames as defined in [the Debian release page](https://wiki.debian.org/DebianReleases#Production_Releases) such as **buster**, **bullseye**, **bookworm**, ...
 
 To publish a stable package we need to:
