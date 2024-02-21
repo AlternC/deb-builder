@@ -1,0 +1,3 @@
+<?php
+
+$travis_token="travis token";
