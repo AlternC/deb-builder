@@ -37,4 +37,4 @@ install:
 after_success:
     - cd ${TRAVIS_BUILD_DIR}
     - ./dput.sh ${REPO_TO_BUILD}
-    - ./deploy_github.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main}
+    - ./deploy_github.sh ${REPO_TO_BUILD} ${BRANCH_TO_BUILD:=main} ${FORCE_BUILD:=false}

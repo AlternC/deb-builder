@@ -2,6 +2,7 @@
 
 REPO_TO_BUILD=${1}
 BRANCH_TO_BUILD=${2:-main}
+FORCE_BUILD=${3:-false}
 
 if [ ! -d "$REPO_TO_BUILD" ]; then
     exit 1;
@@ -24,6 +25,10 @@ if [[ ${DISTRIBUTIONS} == "experimental" ]]; then
 
     gh release delete "${VERSION}" -R "${REPO_TO_BUILD}" --cleanup-tag -y
 fi;
+
+if [[ ${FORCE_BUILD} == true ]]; then
+    gh release upload "${VERSION}" ../*.deb --clobber  --repo "${REPO_TO_BUILD}"
+fi
 
 gh release create \
     "${VERSION}" \
