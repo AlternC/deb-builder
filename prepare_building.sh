@@ -50,6 +50,6 @@ printf "compression = \"gzip\"\ncompression-level = 9\n" >> debian/source/option
 printf "override_dh_builddeb:\n	dh_builddeb -- -Zgzip\n" >> debian/rules
 
 #Nightly packages are yet done, we must stop here
-if [[ "${TAG_STATUS}" == "nightly" ]]; then
+if [[ "${TAG_STATUS}" == "nightly" && "${FORCE_BUILD}" == false ]]; then
     exit 1
 fi
